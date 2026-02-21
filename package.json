@@ -1,0 +1,28 @@
+{
+  "name": "uptime-monitor",
+  "version": "1.0.0",
+  "description": "Uptime monitoring service for websites and game servers",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "concurrently \"node server/index.js\" \"cd client && npm run dev\"",
+    "build": "cd client && npm install && npm run build",
+    "install:all": "npm install && cd client && npm install"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "gamedig": "^5.1.0",
+    "minecraft-server-util": "^5.4.1",
+    "node-cron": "^3.0.3",
+    "puppeteer": "^22.12.1",
+    "ts3-nodejs-library": "^3.4.1",
+    "ws": "^8.17.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

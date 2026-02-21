@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  uptime-monitor:
+    image: node:20-alpine
+    container_name: uptime-monitor
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+      - ./server:/app/server
+      - ./package.json:/app/package.json
+    working_dir: /app
+    command: ["sh", "-c", "apk add --no-cache dumb-init chromium && npm install && node server/index.js"]
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      - DB_PATH=/app/data/uptime.db
+      - CRON_SCHEDULE=*/1 * * * *
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+
+volumes: {}
