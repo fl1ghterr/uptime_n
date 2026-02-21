@@ -1,14 +1,13 @@
-import { checkHttp, closeBrowser } from './http-monitor.js';
-import { checkMinecraft, checkMinecraftBedrock } from './minecraft.js';
-import { checkValve, getSupportedGames } from './valve.js';
-import { checkFiveM, checkFiveMDynamic } from './fivem.js';
-import { checkTeamSpeak, checkTeamSpeakSimple } from './teamspeak.js';
+import { checkHttp } from './http-monitor.js';
+import { checkMinecraft } from './minecraft.js';
+import { checkValve } from './valve.js';
+import { checkFiveM } from './fivem.js';
+import { checkTeamSpeak } from './teamspeak.js';
 
 const monitors = {
   http: checkHttp,
   https: checkHttp,
   minecraft: checkMinecraft,
-  minecraft_bedrock: checkMinecraftBedrock,
   valve: checkValve,
   fivem: checkFiveM,
   teamspeak: checkTeamSpeak
@@ -43,13 +42,22 @@ export async function checkService(service) {
 
 export function getSupportedServiceTypes() {
   return [
-    { type: 'http', name: 'HTTP/HTTPS Website', icon: 'globe' },
-    { type: 'minecraft', name: 'Minecraft Server (Java)', icon: 'cube' },
-    { type: 'minecraft_bedrock', name: 'Minecraft Server (Bedrock)', icon: 'cube' },
-    { type: 'valve', name: 'Valve/Source Server (CS2, TF2, etc.)', icon: 'gamepad' },
-    { type: 'fivem', name: 'FiveM Server (GTA V)', icon: 'car' },
-    { type: 'teamspeak', name: 'TeamSpeak Server', icon: 'microphone' }
+    { type: 'http', name: 'HTTP/HTTPS Website' },
+    { type: 'minecraft', name: 'Minecraft Server (Java)' },
+    { type: 'valve', name: 'Valve/Source Server (CS2, TF2, etc.)' },
+    { type: 'fivem', name: 'FiveM Server (GTA V)' },
+    { type: 'teamspeak', name: 'TeamSpeak Server' }
   ];
 }
 
-export { closeBrowser, getSupportedGames };
+export function getSupportedGames() {
+  return {
+    'cs2': 'Counter-Strike 2',
+    'csgo': 'Counter-Strike: Global Offensive',
+    'tf2': 'Team Fortress 2',
+    'garrysmod': "Garry's Mod",
+    'rust': 'Rust',
+    'arkse': 'ARK: Survival Evolved',
+    'arma3': 'Arma 3'
+  };
+}
